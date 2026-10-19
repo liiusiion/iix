@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { DrizzleModule } from './common/modules/drizzle/drizzle.module';
-import { AccommodationsRepositoryModule } from './modules/repositories/accommodations/accommodations-repository.module';
-import { AccommodationsModule } from './modules/services/accommodations/accommodations.module';
-import { AccommodationsController } from './entrypoints/api/accommodations/accommodations.controller';
+import { PropertiesRepositoryModule } from './modules/repositories/properties/properties-repository.module';
+import { PropertiesModule } from './modules/services/properties/properties.module';
+import { PropertiesController } from './entrypoints/api/properties/properties.controller';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ZodSerializerInterceptor } from 'nestjs-zod';
 import { ZodValidationPipe } from './common/pipes/zod-validation.pipe';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 @Module({
-  imports: [DrizzleModule, AccommodationsRepositoryModule, AccommodationsModule],
-  controllers: [AppController, AccommodationsController],
+  imports: [DrizzleModule, PropertiesRepositoryModule, PropertiesModule],
+  controllers: [AppController, PropertiesController],
   providers: [
     {
       provide: APP_PIPE,

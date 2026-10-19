@@ -5,16 +5,16 @@ export const commonFields = {
 
   createdAt: timestamp({
     withTimezone: true,
-    mode: 'string',
+    mode: 'date',
   })
     .defaultNow()
     .notNull(),
 
   updatedAt: timestamp({
     withTimezone: true,
-    mode: 'string',
+    mode: 'date',
   })
     .defaultNow()
-    .$onUpdate(() => new Date().toISOString())
+    .$onUpdate(() => new Date())
     .notNull(),
 };
