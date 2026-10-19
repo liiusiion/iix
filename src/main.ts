@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Girka')
-    .setDescription('The Girka API description.')
+    .setTitle('Liili')
+    .setDescription('The Liili API description.')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

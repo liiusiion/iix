@@ -1,13 +1,4 @@
-import {
-  check,
-  integer,
-  pgEnum,
-  pgTable,
-  real,
-  smallint,
-  text,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { check, integer, real, smallint, text, varchar } from 'drizzle-orm/pg-core';
 import { commonFields } from '../../helpers/common-fields.db';
 import { sql } from 'drizzle-orm';
 import { mainSchema } from '../pg-schemas';
