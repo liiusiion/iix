@@ -1,26 +1,23 @@
-version: '3.9'
+name: liili-be
 
 services:
   db:
     container_name: liili_db
-    image: postgres
+    image: postgres:18
+    restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: "${DB_PASSWORD}"
-      POSTGRES_DB: "${DB_NAME}"
-      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
     ports:
-      - "${DB_PORT}:5432"
+      - 127.0.0.1:${DB_PORT}:5432
+    volumes:
+      - db-data:/var/lib/postgresql
     healthcheck:
-      test:
-        [ 
-          "CMD-SHELL",
-          "pg_isready -U ${DB_USER} -d ${DB_NAME}"
-        ]
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}']
       interval: 5s
       timeout: 5s
       retries: 5
-    networks:
-      - liili-network
-networks:
-  liili-network:
-    driver: bridge
+
+volumes:
+  db-data:
