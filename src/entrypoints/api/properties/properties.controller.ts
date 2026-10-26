@@ -6,6 +6,8 @@ import { EntityIdResponseDto } from '../common/dto/response/entity-id-response.s
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { EntityIdPathDto } from '../common/dto/request/entity-id-path.dto';
 import { RetrievePropertyResponseDto } from './dto/response/retrieve-property.schema';
+import { AllowAnonymous, Roles } from '@thallesp/nestjs-better-auth';
+import { Role } from '../../../db/schema';
 
 @ApiTags('Properties')
 @Controller('properties')
@@ -18,6 +20,7 @@ export class PropertiesController {
   @ApiOperation({
     summary: 'Create a Property.',
   })
+  @Roles([Role.Admin])
   @Post()
   public createProperty(@Body() body: CreatePropertyDto) {
     return this.accommodationsService.createProperty(body);
@@ -29,6 +32,7 @@ export class PropertiesController {
   @ApiOperation({
     summary: 'Retrieve a Property.',
   })
+  @AllowAnonymous()
   @Get(':id')
   public retrieveProperty(@Param() params: EntityIdPathDto) {
     return this.accommodationsService.retrieveProperty(params.id);

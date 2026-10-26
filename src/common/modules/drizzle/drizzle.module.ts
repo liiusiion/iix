@@ -6,7 +6,7 @@ import { injectionToken } from '../../helpers/injection-token.helper';
 import { defineRelationsPart, sql } from 'drizzle-orm';
 import { bookingsRelations } from '../../../db/schema';
 
-const db = drizzle({
+export const db = drizzle({
   connection: {
     connectionString: dbConfig.DB_URL,
   },
