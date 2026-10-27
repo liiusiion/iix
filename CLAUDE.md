@@ -20,7 +20,7 @@ Everything is under `/api`: app routes (`/api/properties`), docs at `/api/refere
 
 - `src/entrypoints/api/<feature>/` controllers, with Zod DTOs in `dto/request/*.schema.ts` and `dto/response/*.schema.ts`
 - `src/modules/services/<name>/` business logic, `src/modules/repositories/<name>/` DB access, `src/modules/integrations/<name>/` external API clients
-- `src/common/` shared decorators, filters, helpers, pipes, types and infrastructure modules (e.g. `modules/drizzle`)
+- `src/common/` shared decorators, filters, helpers, middlewares, pipes, types and infrastructure modules (e.g. `modules/drizzle`)
 - `src/configs/*.config.ts` env variables parsed with Zod at startup
 - `src/db/schema/tables/*.table.ts` Drizzle tables, `src/db/migrations/` generated migrations
 - `src/auth.ts` Better Auth config as a `createAuth()` factory, built through Nest DI in `app.module.ts`

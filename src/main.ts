@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { cleanupOpenApiDoc } from 'nestjs-zod';
 import { apiReference } from '@scalar/nestjs-api-reference';
 import { authConfig } from './configs/auth.config';
+import { RequestLoggerMiddleware } from './common/middlewares/request-logger.middleware';
 
 // Better Auth's routes and docs live under /api/auth, so everything else goes under /api too
 const API_PREFIX = 'api';
@@ -13,6 +14,11 @@ async function bootstrap() {
     // Better Auth reads the raw body of its own routes, AuthModule re-adds parsers for the rest
     bodyParser: false,
   });
+
+  // Registered globally rather than in AppModule.configure(): AuthModule is a global module, so its
+  // middleware (Better Auth's handler) would run first and answer /api/auth/* without reaching ours
+  const requestLogger = new RequestLoggerMiddleware();
+  app.use(requestLogger.use.bind(requestLogger));
 
   app.setGlobalPrefix(API_PREFIX);
 
