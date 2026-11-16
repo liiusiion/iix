@@ -17,17 +17,12 @@ export class PropertiesRepository {
   }
 
   public async retrieveProperty(id: string) {
-    try {
-      const property = await this.db.query.properties.findFirst({
-        where: {
-          id,
-        },
-      });
+    const property = await this.db.query.properties.findFirst({
+      where: {
+        id,
+      },
+    });
 
-      console.log({ property });
-      return property;
-    } catch (error) {
-      console.log(error);
-    }
+    return property;
   }
 }
