@@ -1,4 +1,3 @@
-import { createZodDto } from 'nestjs-zod';
 import z from 'zod';
 
 export const CommonFieldsSchema = z.object({
@@ -19,4 +18,4 @@ export const CommonFieldsSchema = z.object({
     }),
 });
 
-export class CommonFieldsResponseDto extends createZodDto(CommonFieldsSchema) {}
+export type CommonFieldsResponseDto = z.infer<typeof CommonFieldsSchema>;

@@ -1,40 +1,48 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { PropertiesService } from '../../../modules/services/properties/properties.service';
-import { CreatePropertyDto } from './dto/request/create-property.schema';
-import { ZodResponse } from 'nestjs-zod';
-import { EntityIdResponseDto } from '../common/dto/response/entity-id-response.schema';
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { PropertiesService } from '../../../modules/services/properties/properties.service.js';
+import {
+  CreatePropertySchema,
+  type CreatePropertyDto,
+} from './dto/request/create-property.schema.js';
+import { EntityIdResponseSchema } from '../common/dto/response/entity-id-response.schema.js';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { EntityIdPathDto } from '../common/dto/request/entity-id-path.dto';
-import { RetrievePropertyResponseDto } from './dto/response/retrieve-property.schema';
+import {
+  EntityIdPathSchema,
+  type EntityIdPathDto,
+} from '../common/dto/request/entity-id-path.dto.js';
+import { RetrievePropertySchema } from './dto/response/retrieve-property.schema.js';
 import { AllowAnonymous, Roles } from '@thallesp/nestjs-better-auth';
-import { Role } from '../../../db/schema';
+import { Role } from '../../../db/schema/index.js';
+import { ApiSchemaResponse } from '../../../common/decorators/api-schema-response.decorator.js';
 
 @ApiTags('Properties')
 @Controller('properties')
 export class PropertiesController {
   constructor(private readonly accommodationsService: PropertiesService) {}
 
-  @ZodResponse({
-    type: EntityIdResponseDto,
+  @ApiSchemaResponse({
+    status: HttpStatus.CREATED,
+    schema: EntityIdResponseSchema,
   })
   @ApiOperation({
     summary: 'Create a Property.',
   })
   @Roles([Role.Admin])
   @Post()
-  public createProperty(@Body() body: CreatePropertyDto) {
+  public createProperty(@Body({ schema: CreatePropertySchema }) body: CreatePropertyDto) {
     return this.accommodationsService.createProperty(body);
   }
 
-  @ZodResponse({
-    type: RetrievePropertyResponseDto,
+  @ApiSchemaResponse({
+    status: HttpStatus.OK,
+    schema: RetrievePropertySchema,
   })
   @ApiOperation({
     summary: 'Retrieve a Property.',
   })
   @AllowAnonymous()
   @Get(':id')
-  public retrieveProperty(@Param() params: EntityIdPathDto) {
+  public retrieveProperty(@Param({ schema: EntityIdPathSchema }) params: EntityIdPathDto) {
     return this.accommodationsService.retrieveProperty(params.id);
   }
 }

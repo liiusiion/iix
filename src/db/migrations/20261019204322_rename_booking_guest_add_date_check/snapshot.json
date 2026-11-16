@@ -1,539 +1,69 @@
 {
-  "version": "8",
+  "type": "diff",
+  "version": "9",
   "dialect": "postgres",
   "id": "54678bb2-7638-489f-8903-777492ef54d7",
   "prevIds": [
     "f427f7e5-46b3-4007-a1d6-68566f82b6db"
   ],
-  "ddl": [
+  "footprints": [
     {
-      "name": "main",
-      "entityType": "schemas"
-    },
-    {
-      "values": [
-        "Cabin",
-        "Room"
+      "statementType": "rename_column",
+      "statementTarget": [
+        "column",
+        "main",
+        "bookings",
+        "user_id"
       ],
-      "name": "property_type",
-      "entityType": "enums",
-      "schema": "main"
-    },
-    {
-      "values": [
-        "Guest",
-        "Admin",
-        "Booking Manager"
+      "writes": [
+        "s|col|main.bookings.user_id",
+        "n|col|main.bookings.user_id",
+        "s|col|main.bookings.guest_id",
+        "n|col|main.bookings.guest_id"
       ],
-      "name": "role",
-      "entityType": "enums",
-      "schema": "main"
+      "reads": [
+        "n|tbl|main.bookings",
+        "n|sch|main"
+      ]
     },
     {
-      "values": [
-        "Pending",
-        "Confirmed",
-        "Cancelled",
-        "Rejected"
+      "statementType": "add_check",
+      "statementTarget": [
+        "table",
+        "main",
+        "bookings"
       ],
-      "name": "booking_status",
-      "entityType": "enums",
-      "schema": "main"
-    },
-    {
-      "isRlsEnabled": false,
-      "name": "properties",
-      "entityType": "tables",
-      "schema": "main"
-    },
-    {
-      "isRlsEnabled": false,
-      "name": "users",
-      "entityType": "tables",
-      "schema": "main"
-    },
-    {
-      "isRlsEnabled": false,
-      "name": "bookings",
-      "entityType": "tables",
-      "schema": "main"
-    },
-    {
-      "type": "uuid",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "gen_random_uuid()",
-      "generated": null,
-      "identity": null,
-      "name": "id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
-      "name": "created_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
-      "name": "updated_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "varchar(100)",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "title",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "property_type",
-      "typeSchema": "main",
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "type",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "smallint",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "capacity",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "integer",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "price",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "real",
-      "typeSchema": null,
-      "notNull": false,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "rating",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "text",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "description",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "varchar",
-      "typeSchema": null,
-      "notNull": false,
-      "dimensions": 1,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "photos",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "type": "uuid",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "gen_random_uuid()",
-      "generated": null,
-      "identity": null,
-      "name": "id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
-      "name": "created_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
-      "name": "updated_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "varchar(50)",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "first_name",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "varchar(50)",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "last_name",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "varchar(12)",
-      "typeSchema": null,
-      "notNull": false,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "phone",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "varchar(255)",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "email",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "varchar(255)",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "password",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "role",
-      "typeSchema": "main",
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "role",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "uuid",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "gen_random_uuid()",
-      "generated": null,
-      "identity": null,
-      "name": "id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
-      "name": "created_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
-      "name": "updated_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "booking_status",
-      "typeSchema": "main",
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "status",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "start_date",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "end_date",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "varchar(1000)",
-      "typeSchema": null,
-      "notNull": false,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "message",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "uuid",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "property_id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "type": "uuid",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "guest_id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "nameExplicit": false,
-      "columns": [
-        "property_id"
+      "writes": [
+        "s|ck|main.bookings.valid_date_range",
+        "n|ck|main.bookings.valid_date_range",
+        "e|ck|main.bookings.valid_date_range",
+        "n|con|main.bookings.valid_date_range"
       ],
-      "schemaTo": "main",
-      "tableTo": "properties",
-      "columnsTo": [
-        "id"
-      ],
-      "onUpdate": "NO ACTION",
-      "onDelete": "NO ACTION",
-      "name": "bookings_property_id_properties_id_fkey",
-      "entityType": "fks",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "nameExplicit": false,
-      "columns": [
-        "guest_id"
-      ],
-      "schemaTo": "main",
-      "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
-      "onUpdate": "NO ACTION",
-      "onDelete": "NO ACTION",
-      "name": "bookings_user_id_users_id_fkey",
-      "entityType": "fks",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
-      "columns": [
-        "id"
-      ],
-      "nameExplicit": false,
-      "name": "properties_pkey",
-      "schema": "main",
-      "table": "properties",
-      "entityType": "pks"
-    },
-    {
-      "columns": [
-        "id"
-      ],
-      "nameExplicit": false,
-      "name": "users_pkey",
-      "schema": "main",
-      "table": "users",
-      "entityType": "pks"
-    },
-    {
-      "columns": [
-        "id"
-      ],
-      "nameExplicit": false,
-      "name": "bookings_pkey",
-      "schema": "main",
-      "table": "bookings",
-      "entityType": "pks"
-    },
-    {
-      "nameExplicit": false,
-      "columns": [
-        "email"
-      ],
-      "nullsNotDistinct": false,
-      "name": "users_email_key",
-      "schema": "main",
-      "table": "users",
-      "entityType": "uniques"
-    },
-    {
-      "value": "char_length(\"title\") >= 3",
-      "name": "min_title_length",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "value": "\"capacity\" >= 1 AND \"capacity\" <= 100",
-      "name": "capacity_positive",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "value": "\"price\" >= 0",
-      "name": "price_positive",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "value": "\"rating\" IS NULL OR (\"rating\" >= 0 AND \"rating\" <= 5)",
-      "name": "rating_valid",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
-      "value": "\"start_date\" < \"end_date\"",
-      "name": "valid_date_range",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "bookings"
+      "reads": [
+        "n|tbl|main.bookings",
+        "n|sch|main",
+        "n|col|main.bookings.start_date",
+        "n|col|main.bookings.end_date"
+      ]
     }
   ],
-  "renames": [
-    "main.bookings.user_id->main.bookings.guest_id"
+  "deltas": [
+    {
+      "op": "rename",
+      "key": "columns\u0000[\"main\",\"bookings\",\"user_id\"]",
+      "set": {
+        "name": "guest_id"
+      }
+    },
+    {
+      "op": "create",
+      "row": {
+        "schema": "main",
+        "table": "bookings",
+        "name": "valid_date_range",
+        "value": "\"start_date\" < \"end_date\"",
+        "entityType": "checks"
+      }
+    }
   ]
 }

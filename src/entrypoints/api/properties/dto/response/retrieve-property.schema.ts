@@ -1,7 +1,6 @@
-import { CommonFieldsSchema } from '../../../common/dto/response/common-fields-response.schema';
-import { createZodDto } from 'nestjs-zod';
+import { CommonFieldsSchema } from '../../../common/dto/response/common-fields-response.schema.js';
 import z from 'zod';
-import { CreatePropertySchema } from '../request/create-property.schema';
+import { CreatePropertySchema } from '../request/create-property.schema.js';
 
 export const RetrievePropertySchema = z.object({
   ...CommonFieldsSchema.shape,
@@ -14,4 +13,4 @@ export const RetrievePropertySchema = z.object({
   photos: z.string().array().nullable(),
 });
 
-export class RetrievePropertyResponseDto extends createZodDto(RetrievePropertySchema) {}
+export type RetrievePropertyResponseDto = z.infer<typeof RetrievePropertySchema>;

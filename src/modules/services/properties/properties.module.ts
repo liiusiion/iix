@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { PropertiesService } from './properties.service';
-import { PropertiesRepositoryModule } from '../../repositories/properties/properties-repository.module';
+import { PropertiesService } from './properties.service.js';
+import { PropertiesRepositoryModule } from '../../repositories/properties/properties-repository.module.js';
 
 @Module({
   providers: [PropertiesService],

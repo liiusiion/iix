@@ -1,6 +1,5 @@
 import { z } from 'zod';
-import { propertyType } from '../../../../../db/schema';
-import { createZodDto } from 'nestjs-zod';
+import { propertyType } from '../../../../../db/schema/index.js';
 
 export const CreatePropertySchema = z.object({
   title: z.string().min(3).max(100).meta({
@@ -15,6 +14,4 @@ export const CreatePropertySchema = z.object({
   }),
 });
 
-export type CreateProperty = z.infer<typeof CreatePropertySchema>;
-
-export class CreatePropertyDto extends createZodDto(CreatePropertySchema) {}
+export type CreatePropertyDto = z.infer<typeof CreatePropertySchema>;

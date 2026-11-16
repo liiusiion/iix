@@ -1,10 +1,10 @@
 import { Global, Module } from '@nestjs/common';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import * as schema from '../../../db/schema';
-import { dbConfig } from '../../../configs/db.config';
-import { injectionToken } from '../../helpers/injection-token.helper';
+import * as schema from '../../../db/schema/index.js';
+import { dbConfig } from '../../../configs/db.config.js';
+import { injectionToken } from '../../helpers/injection-token.helper.js';
 import { defineRelationsPart, sql } from 'drizzle-orm';
-import { bookingsRelations } from '../../../db/schema';
+import { bookingsRelations } from '../../../db/schema/index.js';
 
 export const db = drizzle({
   connection: {

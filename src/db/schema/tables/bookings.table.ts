@@ -1,9 +1,9 @@
 import { check, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
-import { commonFields } from '../../helpers/common-fields.db';
-import { mainSchema } from '../pg-schemas';
-import { users } from './users.table';
+import { commonFields } from '../../helpers/common-fields.db.js';
+import { mainSchema } from '../pg-schemas.js';
+import { users } from './users.table.js';
 import { defineRelationsPart, sql } from 'drizzle-orm';
-import { properties } from './properties.table';
+import { properties } from './properties.table.js';
 
 export const BookingStatus = {
   Pending: 'Pending',

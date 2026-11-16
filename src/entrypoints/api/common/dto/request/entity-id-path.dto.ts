@@ -1,8 +1,8 @@
-import { createZodDto } from 'nestjs-zod';
-import { CommonFieldsSchema } from '../response/common-fields-response.schema';
+import type z from 'zod';
+import { CommonFieldsSchema } from '../response/common-fields-response.schema.js';
 
-export class EntityIdPathDto extends createZodDto(
-  CommonFieldsSchema.pick({
-    id: true,
-  }),
-) {}
+export const EntityIdPathSchema = CommonFieldsSchema.pick({
+  id: true,
+});
+
+export type EntityIdPathDto = z.infer<typeof EntityIdPathSchema>;

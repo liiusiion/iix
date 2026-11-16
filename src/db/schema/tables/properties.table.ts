@@ -1,7 +1,7 @@
 import { check, integer, real, smallint, text, varchar } from 'drizzle-orm/pg-core';
-import { commonFields } from '../../helpers/common-fields.db';
+import { commonFields } from '../../helpers/common-fields.db.js';
 import { sql } from 'drizzle-orm';
-import { mainSchema } from '../pg-schemas';
+import { mainSchema } from '../pg-schemas.js';
 
 export const PropertyType = {
   Cabin: 'Cabin',

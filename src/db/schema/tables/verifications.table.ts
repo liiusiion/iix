@@ -1,6 +1,6 @@
 import { index, text, timestamp } from 'drizzle-orm/pg-core';
-import { commonFields } from '../../helpers/common-fields.db';
-import { mainSchema } from '../pg-schemas';
+import { commonFields } from '../../helpers/common-fields.db.js';
+import { mainSchema } from '../pg-schemas.js';
 
 export const verifications = mainSchema.table(
   'verifications',

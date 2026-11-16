@@ -1,8 +1,8 @@
-name: liili-be
+name: iix
 
 services:
   db:
-    container_name: liili_db
+    container_name: iix_db
     image: postgres:18
     restart: unless-stopped
     environment:

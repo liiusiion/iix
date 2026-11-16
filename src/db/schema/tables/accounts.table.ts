@@ -1,7 +1,7 @@
 import { index, text, timestamp, unique, uuid } from 'drizzle-orm/pg-core';
-import { commonFields } from '../../helpers/common-fields.db';
-import { mainSchema } from '../pg-schemas';
-import { users } from './users.table';
+import { commonFields } from '../../helpers/common-fields.db.js';
+import { mainSchema } from '../pg-schemas.js';
+import { users } from './users.table.js';
 
 // one row per sign-in method: 'credential' rows hold the password hash, 'google' rows link the Google account
 export const accounts = mainSchema.table(

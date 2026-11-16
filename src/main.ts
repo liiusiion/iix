@@ -1,10 +1,9 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module.js';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { cleanupOpenApiDoc } from 'nestjs-zod';
 import { apiReference } from '@scalar/nestjs-api-reference';
-import { authConfig } from './configs/auth.config';
-import { RequestLoggerMiddleware } from './common/middlewares/request-logger.middleware';
+import { authConfig } from './configs/auth.config.js';
+import { RequestLoggerMiddleware } from './common/middlewares/request-logger.middleware.js';
 
 // Better Auth's routes and docs live under /api/auth, so everything else goes under /api too
 const API_PREFIX = 'api';
@@ -34,7 +33,7 @@ async function bootstrap() {
     .addCookieAuth('better-auth.session_token')
     .build();
 
-  const documentFactory = () => cleanupOpenApiDoc(SwaggerModule.createDocument(app, config));
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup(`${API_PREFIX}/swagger`, app, documentFactory, {
     jsonDocumentUrl: `${API_PREFIX}/swagger/json`,
@@ -55,4 +54,4 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
 }
 
-void bootstrap();
+await bootstrap();

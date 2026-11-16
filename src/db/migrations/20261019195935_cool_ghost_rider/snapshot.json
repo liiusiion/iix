@@ -1,9 +1,182 @@
 {
-  "version": "8",
+  "type": "base",
+  "version": "9",
   "dialect": "postgres",
   "id": "f427f7e5-46b3-4007-a1d6-68566f82b6db",
   "prevIds": [
     "00000000-0000-0000-0000-000000000000"
+  ],
+  "footprints": [
+    {
+      "statementType": "create_schema",
+      "statementTarget": [
+        "schema",
+        "main"
+      ],
+      "writes": [
+        "s|sch|main",
+        "n|sch|main",
+        "e|sch|main"
+      ]
+    },
+    {
+      "statementType": "create_enum",
+      "statementTarget": [
+        "enum",
+        "main",
+        "property_type"
+      ],
+      "writes": [
+        "s|enum|main.property_type",
+        "n|enum|main.property_type",
+        "e|enum|main.property_type",
+        "n|type|main.property_type"
+      ],
+      "reads": [
+        "n|sch|main"
+      ]
+    },
+    {
+      "statementType": "create_enum",
+      "statementTarget": [
+        "enum",
+        "main",
+        "role"
+      ],
+      "writes": [
+        "s|enum|main.role",
+        "n|enum|main.role",
+        "e|enum|main.role",
+        "n|type|main.role"
+      ],
+      "reads": [
+        "n|sch|main"
+      ]
+    },
+    {
+      "statementType": "create_enum",
+      "statementTarget": [
+        "enum",
+        "main",
+        "booking_status"
+      ],
+      "writes": [
+        "s|enum|main.booking_status",
+        "n|enum|main.booking_status",
+        "e|enum|main.booking_status",
+        "n|type|main.booking_status"
+      ],
+      "reads": [
+        "n|sch|main"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "main",
+        "properties"
+      ],
+      "writes": [
+        "s|tbl|main.properties",
+        "n|tbl|main.properties",
+        "e|tbl|main.properties",
+        "n|rel|main.properties",
+        "n|type|main.properties",
+        "n|rel|main.properties_pkey"
+      ],
+      "reads": [
+        "n|sch|main",
+        "n|enum|main.property_type"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "main",
+        "users"
+      ],
+      "writes": [
+        "s|tbl|main.users",
+        "n|tbl|main.users",
+        "e|tbl|main.users",
+        "n|rel|main.users",
+        "n|type|main.users",
+        "n|rel|main.users_pkey",
+        "n|rel|main.users_email_key"
+      ],
+      "reads": [
+        "n|sch|main",
+        "n|enum|main.role"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "main",
+        "bookings"
+      ],
+      "writes": [
+        "s|tbl|main.bookings",
+        "n|tbl|main.bookings",
+        "e|tbl|main.bookings",
+        "n|rel|main.bookings",
+        "n|type|main.bookings",
+        "n|rel|main.bookings_pkey"
+      ],
+      "reads": [
+        "n|sch|main",
+        "n|enum|main.booking_status"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "main",
+        "bookings"
+      ],
+      "writes": [
+        "s|fk|main.bookings.bookings_property_id_properties_id_fkey",
+        "n|fk|main.bookings.bookings_property_id_properties_id_fkey",
+        "e|fk|main.bookings.bookings_property_id_properties_id_fkey",
+        "n|con|main.bookings.bookings_property_id_properties_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|main.bookings",
+        "n|sch|main",
+        "n|tbl|main.properties",
+        "n|sch|main",
+        "n|col|main.bookings.property_id",
+        "n|col|main.properties.id",
+        "e|uniqueness|main.properties.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "main",
+        "bookings"
+      ],
+      "writes": [
+        "s|fk|main.bookings.bookings_user_id_users_id_fkey",
+        "n|fk|main.bookings.bookings_user_id_users_id_fkey",
+        "e|fk|main.bookings.bookings_user_id_users_id_fkey",
+        "n|con|main.bookings.bookings_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|main.bookings",
+        "n|sch|main",
+        "n|tbl|main.users",
+        "n|sch|main",
+        "n|col|main.bookings.user_id",
+        "n|col|main.users.id",
+        "e|uniqueness|main.users.id"
+      ]
+    }
   ],
   "ddl": [
     {
@@ -11,54 +184,57 @@
       "entityType": "schemas"
     },
     {
+      "schema": "main",
+      "name": "properties",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "main",
+      "name": "users",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "main",
+      "name": "bookings",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "main",
+      "name": "property_type",
       "values": [
         "Cabin",
         "Room"
       ],
-      "name": "property_type",
-      "entityType": "enums",
-      "schema": "main"
+      "entityType": "enums"
     },
     {
+      "schema": "main",
+      "name": "role",
       "values": [
         "Guest",
         "Admin",
         "Booking Manager"
       ],
-      "name": "role",
-      "entityType": "enums",
-      "schema": "main"
+      "entityType": "enums"
     },
     {
+      "schema": "main",
+      "name": "booking_status",
       "values": [
         "Pending",
         "Confirmed",
         "Cancelled",
         "Rejected"
       ],
-      "name": "booking_status",
-      "entityType": "enums",
-      "schema": "main"
+      "entityType": "enums"
     },
     {
-      "isRlsEnabled": false,
-      "name": "properties",
-      "entityType": "tables",
-      "schema": "main"
-    },
-    {
-      "isRlsEnabled": false,
-      "name": "users",
-      "entityType": "tables",
-      "schema": "main"
-    },
-    {
-      "isRlsEnabled": false,
-      "name": "bookings",
-      "entityType": "tables",
-      "schema": "main"
-    },
-    {
+      "schema": "main",
+      "table": "properties",
+      "name": "id",
       "type": "uuid",
       "typeSchema": null,
       "notNull": true,
@@ -66,25 +242,12 @@
       "default": "gen_random_uuid()",
       "generated": null,
       "identity": null,
-      "name": "id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
+      "schema": "main",
+      "table": "properties",
       "name": "created_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
-    },
-    {
       "type": "timestamp with time zone",
       "typeSchema": null,
       "notNull": true,
@@ -92,12 +255,25 @@
       "default": "now()",
       "generated": null,
       "identity": null,
-      "name": "updated_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "properties",
+      "name": "title",
       "type": "varchar(100)",
       "typeSchema": null,
       "notNull": true,
@@ -105,12 +281,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "title",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "type",
       "type": "property_type",
       "typeSchema": "main",
       "notNull": true,
@@ -118,12 +294,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "type",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "capacity",
       "type": "smallint",
       "typeSchema": null,
       "notNull": true,
@@ -131,12 +307,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "capacity",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "price",
       "type": "integer",
       "typeSchema": null,
       "notNull": true,
@@ -144,12 +320,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "price",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "rating",
       "type": "real",
       "typeSchema": null,
       "notNull": false,
@@ -157,12 +333,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "rating",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "description",
       "type": "text",
       "typeSchema": null,
       "notNull": true,
@@ -170,12 +346,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "description",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "properties",
+      "name": "photos",
       "type": "varchar",
       "typeSchema": null,
       "notNull": false,
@@ -183,12 +359,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "photos",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "properties"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "users",
+      "name": "id",
       "type": "uuid",
       "typeSchema": null,
       "notNull": true,
@@ -196,25 +372,12 @@
       "default": "gen_random_uuid()",
       "generated": null,
       "identity": null,
-      "name": "id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
+      "entityType": "columns"
     },
     {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
+      "schema": "main",
+      "table": "users",
       "name": "created_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
       "type": "timestamp with time zone",
       "typeSchema": null,
       "notNull": true,
@@ -222,25 +385,25 @@
       "default": "now()",
       "generated": null,
       "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "users",
       "name": "updated_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
-      "type": "varchar(50)",
+      "type": "timestamp with time zone",
       "typeSchema": null,
       "notNull": true,
       "dimensions": 0,
-      "default": null,
+      "default": "now()",
       "generated": null,
       "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "users",
       "name": "first_name",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
       "type": "varchar(50)",
       "typeSchema": null,
       "notNull": true,
@@ -248,12 +411,25 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "last_name",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "users",
+      "name": "last_name",
+      "type": "varchar(50)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "users",
+      "name": "phone",
       "type": "varchar(12)",
       "typeSchema": null,
       "notNull": false,
@@ -261,25 +437,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "phone",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
+      "entityType": "columns"
     },
     {
-      "type": "varchar(255)",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
+      "schema": "main",
+      "table": "users",
       "name": "email",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
-    },
-    {
       "type": "varchar(255)",
       "typeSchema": null,
       "notNull": true,
@@ -287,12 +450,25 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "password",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "users",
+      "name": "password",
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "users",
+      "name": "role",
       "type": "role",
       "typeSchema": "main",
       "notNull": true,
@@ -300,12 +476,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "role",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "users"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "bookings",
+      "name": "id",
       "type": "uuid",
       "typeSchema": null,
       "notNull": true,
@@ -313,25 +489,12 @@
       "default": "gen_random_uuid()",
       "generated": null,
       "identity": null,
-      "name": "id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "columns"
     },
     {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": "now()",
-      "generated": null,
-      "identity": null,
+      "schema": "main",
+      "table": "bookings",
       "name": "created_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
       "type": "timestamp with time zone",
       "typeSchema": null,
       "notNull": true,
@@ -339,12 +502,25 @@
       "default": "now()",
       "generated": null,
       "identity": null,
-      "name": "updated_at",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "bookings",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "bookings",
+      "name": "status",
       "type": "booking_status",
       "typeSchema": "main",
       "notNull": true,
@@ -352,25 +528,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "status",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "columns"
     },
     {
-      "type": "timestamp with time zone",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
+      "schema": "main",
+      "table": "bookings",
       "name": "start_date",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
       "type": "timestamp with time zone",
       "typeSchema": null,
       "notNull": true,
@@ -378,12 +541,25 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "end_date",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "bookings",
+      "name": "end_date",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "bookings",
+      "name": "message",
       "type": "varchar(1000)",
       "typeSchema": null,
       "notNull": false,
@@ -391,25 +567,12 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "message",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "columns"
     },
     {
-      "type": "uuid",
-      "typeSchema": null,
-      "notNull": true,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
+      "schema": "main",
+      "table": "bookings",
       "name": "property_id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
-    },
-    {
       "type": "uuid",
       "typeSchema": null,
       "notNull": true,
@@ -417,12 +580,25 @@
       "default": null,
       "generated": null,
       "identity": null,
-      "name": "user_id",
-      "entityType": "columns",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "columns"
     },
     {
+      "schema": "main",
+      "table": "bookings",
+      "name": "user_id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "main",
+      "table": "bookings",
+      "name": "bookings_property_id_properties_id_fkey",
       "nameExplicit": false,
       "columns": [
         "property_id"
@@ -434,12 +610,12 @@
       ],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
-      "name": "bookings_property_id_properties_id_fkey",
-      "entityType": "fks",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "fks"
     },
     {
+      "schema": "main",
+      "table": "bookings",
+      "name": "bookings_user_id_users_id_fkey",
       "nameExplicit": false,
       "columns": [
         "user_id"
@@ -451,80 +627,76 @@
       ],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
-      "name": "bookings_user_id_users_id_fkey",
-      "entityType": "fks",
-      "schema": "main",
-      "table": "bookings"
+      "entityType": "fks"
     },
     {
-      "columns": [
-        "id"
-      ],
-      "nameExplicit": false,
-      "name": "properties_pkey",
       "schema": "main",
       "table": "properties",
-      "entityType": "pks"
-    },
-    {
+      "name": "properties_pkey",
       "columns": [
         "id"
       ],
       "nameExplicit": false,
-      "name": "users_pkey",
+      "entityType": "pks"
+    },
+    {
       "schema": "main",
       "table": "users",
-      "entityType": "pks"
-    },
-    {
+      "name": "users_pkey",
       "columns": [
         "id"
       ],
       "nameExplicit": false,
-      "name": "bookings_pkey",
-      "schema": "main",
-      "table": "bookings",
       "entityType": "pks"
     },
     {
+      "schema": "main",
+      "table": "bookings",
+      "name": "bookings_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "main",
+      "table": "users",
+      "name": "users_email_key",
       "nameExplicit": false,
       "columns": [
         "email"
       ],
       "nullsNotDistinct": false,
-      "name": "users_email_key",
-      "schema": "main",
-      "table": "users",
       "entityType": "uniques"
     },
     {
-      "value": "char_length(\"title\") >= 3",
+      "schema": "main",
+      "table": "properties",
       "name": "min_title_length",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
+      "value": "char_length(\"title\") >= 3",
+      "entityType": "checks"
     },
     {
-      "value": "\"capacity\" >= 1 AND \"capacity\" <= 100",
+      "schema": "main",
+      "table": "properties",
       "name": "capacity_positive",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
+      "value": "\"capacity\" >= 1 AND \"capacity\" <= 100",
+      "entityType": "checks"
     },
     {
-      "value": "\"price\" >= 0",
+      "schema": "main",
+      "table": "properties",
       "name": "price_positive",
-      "entityType": "checks",
-      "schema": "main",
-      "table": "properties"
+      "value": "\"price\" >= 0",
+      "entityType": "checks"
     },
     {
-      "value": "\"rating\" IS NULL OR (\"rating\" >= 0 AND \"rating\" <= 5)",
-      "name": "rating_valid",
-      "entityType": "checks",
       "schema": "main",
-      "table": "properties"
+      "table": "properties",
+      "name": "rating_valid",
+      "value": "\"rating\" IS NULL OR (\"rating\" >= 0 AND \"rating\" <= 5)",
+      "entityType": "checks"
     }
-  ],
-  "renames": []
+  ]
 }

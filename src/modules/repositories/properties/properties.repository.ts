@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { InjectDb } from '../../../common/decorators/inject-db.decorator';
-import { properties } from '../../../db/schema';
-import { CreateProperty } from './types/properties-repository.types';
-import { DrizzleDb } from '../../../common/modules/drizzle/drizzle.module';
+import { InjectDb } from '../../../common/decorators/inject-db.decorator.js';
+import { properties } from '../../../db/schema/index.js';
+import { CreateProperty } from './types/properties-repository.types.js';
+import type { DrizzleDb } from '../../../common/modules/drizzle/drizzle.module.js';
 
 @Injectable()
 export class PropertiesRepository {
