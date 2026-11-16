@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const DbConfigSchema = z.object({
-  DB_URL: z.string().url(),
+  DB_URL: z.url(),
 });
 
 export type DbConfig = z.infer<typeof DbConfigSchema>;
