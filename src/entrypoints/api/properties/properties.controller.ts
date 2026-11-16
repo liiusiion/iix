@@ -9,7 +9,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   EntityIdPathSchema,
   type EntityIdPathDto,
-} from '../common/dto/request/entity-id-path.dto.js';
+} from '../common/dto/request/entity-id-path.schema.js';
 import { RetrievePropertySchema } from './dto/response/retrieve-property.schema.js';
 import { AllowAnonymous, Roles } from '@thallesp/nestjs-better-auth';
 import { Role } from '../../../db/schema/index.js';
