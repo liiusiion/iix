@@ -18,7 +18,7 @@ Do not use `npm run db:push`: drizzle-kit doesn't know about the custom SQL cons
 
 Everything is under `/api`: app routes (`/api/properties`), docs at `/api/reference` (Scalar) and `/api/swagger` (Swagger UI, JSON at `/api/swagger/json`), Better Auth at `/api/auth/*` with its docs at `/api/auth/reference`.
 
-The prefix, CORS, docs and request logger are set up in `main.ts`, so e2e tests that build the app from `AppModule` don't get them.
+The prefix, CORS, docs and request logger are set up by `setupApp()` in `src/app.setup.ts`, with the creation options in `appOptions` (`bodyParser: false` for Better Auth). `main.ts` and the e2e tests both use them, so e2e tests must call `createNestApplication(appOptions)` and `setupApp(app)` to run the same app as production.
 
 ## Structure
 
