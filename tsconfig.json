@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
     "types": ["vitest/globals", "node"]
   }
 }

@@ -17,7 +17,7 @@
     "develop": "docker compose up -d --wait && npm run start:dev",
     "start:debug": "nest start --debug --watch --env-file .env",
     "start:prod": "node dist/main",
-    "lint": "oxlint --type-aware --fix src/ test/",
+    "lint": "oxlint --fix src/ test/",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
