@@ -3,7 +3,10 @@ import { commonFields } from '../../helpers/common-fields.db.js';
 import { mainSchema } from '../pg-schemas.js';
 import { users } from './users.table.js';
 
-// one row per sign-in method: 'credential' rows hold the password hash, 'google' rows link the Google account
+/**
+ * One row per sign-in method: 'credential' rows hold the password hash, 'google' rows link the
+ * Google account.
+ */
 export const accounts = mainSchema.table(
   'accounts',
   {

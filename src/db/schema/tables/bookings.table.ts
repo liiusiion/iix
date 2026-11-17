@@ -19,8 +19,10 @@ export const bookingStatus = mainSchema.enum('booking_status', [
   BookingStatus.Rejected,
 ]);
 
-// bookings_no_overlap lives in custom migration SQL, since drizzle can't express exclusion
-// constraints: active bookings of the same property can't overlap
+/**
+ * `bookings_no_overlap` lives in custom migration SQL, since drizzle can't express exclusion
+ * constraints: active bookings of the same property can't overlap.
+ */
 export const bookings = mainSchema.table(
   'bookings',
   {

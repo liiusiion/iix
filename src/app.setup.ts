@@ -4,7 +4,7 @@ import { apiReference } from '@scalar/nestjs-api-reference';
 import { authConfig } from './configs/auth.config.js';
 import { RequestLoggerMiddleware } from './common/middlewares/request-logger.middleware.js';
 
-// Better Auth's routes and docs live under /api/auth, so everything else goes under /api too
+/** Better Auth's routes and docs live under /api/auth, so everything else goes under /api too */
 const API_PREFIX = 'api';
 
 export const appOptions: NestApplicationOptions = {
@@ -12,7 +12,7 @@ export const appOptions: NestApplicationOptions = {
   bodyParser: false,
 };
 
-// Shared by main.ts and the e2e tests, so tests run the same pipeline as production
+/** Shared by main.ts and the e2e tests, so tests run the same pipeline as production */
 export const setupApp = (app: INestApplication) => {
   // Registered globally rather than in AppModule.configure(): AuthModule is a global module, so its
   // middleware (Better Auth's handler) would run first and answer /api/auth/* without reaching ours

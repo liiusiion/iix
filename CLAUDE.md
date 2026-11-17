@@ -37,6 +37,7 @@ Controllers call services, services call repositories, and only repositories tou
 - **Types** of a service, repository or module go in a `types/` folder next to it, named `<name>-<kind>.types.ts`, e.g. `modules/services/email/types/email-service.types.ts`. Don't declare them inside the service or module file.
 - **Type-only imports**: a type used in a decorated signature (constructor injection, handler parameters) must be imported with `import type` or the inline `type` modifier, or the build fails (TS1272, `isolatedModules` + `emitDecoratorMetadata`).
 - **Comments** only for things that aren't obvious from the code (why a workaround exists, hidden behavior, a rule enforced elsewhere). No comments that restate the code.
+- **JSDoc** (`/** … */`) for comments that describe a declaration: a function, class, method, constant, type, table or column, so the text shows on hover where it's used. Use `//` only inside function bodies, for notes on a value in an object or config, and for `TODO`s.
 - **Formatting** is Prettier (single quotes, trailing commas, width 100, LF line endings). Control statements always use braces (oxlint `curly`).
 
 ## Validation and DTOs
