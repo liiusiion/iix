@@ -1,10 +1,10 @@
 import { betterAuth } from 'better-auth';
 import { openAPI } from 'better-auth/plugins';
 import { drizzleAdapter } from '@better-auth/drizzle-adapter/relations-v2';
-import { DrizzleDb } from './common/modules/drizzle/drizzle.module.js';
-import { authConfig } from './configs/auth.config.js';
-import { Role } from './db/schema/index.js';
-import { EmailService } from './modules/services/email/email.service.js';
+import { DrizzleDb } from '../common/modules/drizzle/drizzle.module.js';
+import { authConfig } from '../configs/auth.config.js';
+import { Role } from '../db/schema/index.js';
+import { EmailService } from '../modules/services/email/email.service.js';
 
 type AuthDependencies = {
   db: DrizzleDb;

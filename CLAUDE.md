@@ -27,7 +27,7 @@ The prefix, CORS, docs and request logger are set up by `setupApp()` in `src/app
 - `src/common/` shared decorators, filters, helpers, middlewares, pipes and infrastructure modules (e.g. `modules/drizzle`)
 - `src/configs/*.config.ts` env variables parsed with Zod at startup
 - `src/db/schema/tables/*.table.ts` Drizzle tables, `src/db/migrations/` generated migrations
-- `src/auth.ts` Better Auth config as a `createAuth()` factory, built through Nest DI in `app.module.ts`
+- `src/auth/auth.ts` Better Auth config as a `createAuth()` factory, built through Nest DI in `app.module.ts`. `src/auth/auth.cli.ts` builds an instance for the Better Auth CLI only.
 
 Controllers call services, services call repositories, and only repositories touch the DB (inject it with `@InjectDb()`).
 

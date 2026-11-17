@@ -9,7 +9,7 @@ import { StandardSchemaSerializerInterceptor } from '@nestjs/common';
 import { SchemaValidationPipe } from './common/pipes/schema-validation.pipe.js';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
 import { AuthModule } from '@thallesp/nestjs-better-auth';
-import { createAuth } from './auth.js';
+import { createAuth } from './auth/auth.js';
 import { EmailModule } from './modules/services/email/email.module.js';
 import { EmailService } from './modules/services/email/email.service.js';
 import { injectionToken } from './common/helpers/injection-token.helper.js';
