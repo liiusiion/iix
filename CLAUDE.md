@@ -46,6 +46,7 @@ Controllers call services, services call repositories, and only repositories tou
 - Validate input by passing the schema to the parameter decorator: `@Body({ schema: CreatePropertySchema }) body: CreatePropertyDto`, same for `@Param` and `@Query`. Swagger picks the schema up from there.
 - Declare responses with `@ApiSchemaResponse({ status, schema })`: it documents the response and the global serializer parses it with the schema, which strips unknown keys. For array responses pass the item schema, the serializer parses each element.
 - Validation errors are 400 `{ statusCode, timestamp, message: 'Request validation failed.', errors: ["Field '<path>'. <message>"] }` (`SchemaValidationPipe` + `HttpExceptionFilter`).
+- `HttpException` responses are `{ statusCode, timestamp, message, errorCode? }` (`HttpExceptionFilter`). Throw Nest's exceptions, with an `errorCode` when the client should react to the specific error: `new NotFoundException('Property not found.', { errorCode: 'PROPERTY_NOT_FOUND' })`. Other errors are left to Nest's built-in handler (logged, plain 500).
 - Add docs details with `.meta({ description, example })`.
 
 ## Database
